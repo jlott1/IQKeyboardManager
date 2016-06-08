@@ -122,6 +122,7 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
 @property(nonatomic, strong, nonnull, readwrite) NSMutableSet<Class> *disabledTouchResignedClasses;
 @property(nonatomic, strong, nonnull, readwrite) NSMutableSet<Class> *enabledTouchResignedClasses;
 
+@property(nonatomic, strong, nonnull, readwrite) NSMutableSet<Class> *disabledToolbarTextFieldClasses;
 /*******************************************/
 
 @end
@@ -241,6 +242,8 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
             
             strongSelf.disabledTouchResignedClasses = [[NSMutableSet alloc] init];
             strongSelf.enabledTouchResignedClasses = [[NSMutableSet alloc] init];
+
+            strongSelf.disabledToolbarTextFieldClasses = [[NSMutableSet alloc] init];
 
             [self setShouldToolbarUsesTextFieldTintColor:NO];
         });
@@ -459,7 +462,17 @@ NSInteger const kIQPreviousNextButtonToolbarTag     =   -1005;
             }
         }
     }
-    
+
+    //If found any toolbar disabled classes then return.
+    for (Class disabledTextFieldClass in _disabledToolbarTextFieldClasses)
+    {
+        if ([_textFieldView isKindOfClass:disabledTextFieldClass])
+        {
+            enableAutoToolbar = NO;
+            break;
+        }
+    }
+
     return enableAutoToolbar;
 }
 

@@ -218,6 +218,11 @@ extern NSInteger const kIQPreviousNextButtonToolbarTag;
 @property(nonatomic, strong, nonnull, readonly) NSMutableSet<Class> *disabledToolbarClasses;
 
 /**
+ Disable automatic toolbar creation within the scope of disabled toolbar viewControllers classes. Within this scope, 'enableAutoToolbar' property is ignored. Class should be kind of UITextView.
+ */
+@property(nonatomic, strong, nonnull, readonly) NSMutableSet<Class> *disabledToolbarTextFieldClasses;
+
+/**
  Enable automatic toolbar creation within the scope of enabled toolbar viewControllers classes. Within this scope, 'enableAutoToolbar' property is ignored. Class should be kind of UIViewController. If same Class is added in disabledToolbarClasses list, then enabledToolbarClasses will be ignored.
  */
 @property(nonatomic, strong, nonnull, readonly) NSMutableSet<Class> *enabledToolbarClasses;
